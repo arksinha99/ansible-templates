@@ -1,0 +1,23 @@
+---
+- name: Docker_Install_using_playbook
+  hosts: buildserver
+  become: true
+  tasks:
+    - name: install docker
+      yum:
+        name: docker
+        state: present
+        update_cache: yes
+    - name: start docker
+      service:
+        name: docker
+        enabled: yes
+        state:  started
+
+---
+- name: Docker_install_using_roles
+  hosts:  buildserver
+  become: true
+  tasks:
+    - import_role:
+        name: docker

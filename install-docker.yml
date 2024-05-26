@@ -1,0 +1,15 @@
+---
+- hosts: buildserver
+  become: true
+  tasks:
+    - name: install docker
+      yum:
+        name:      
+          - docker
+        state: present
+        update_cache: yes
+    - name: Enable and Start docker service
+      service:
+        name: docker
+        enabled: yes
+        state: started

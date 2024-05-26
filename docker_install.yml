@@ -1,0 +1,42 @@
+---
+- name: Install Docker Git 
+  hosts: appserver
+  become: true
+  
+  tasks:
+    - name: Install docker and wget
+      yum:
+        name:       
+          - docker
+        state: present
+        update_cache: yes
+ 
+    - name: Enable and Start docker service
+      service:
+        name: docker
+        enabled: yes
+        state: started
+
+    - name: Install Git and openjdk
+      yum:
+        name:
+            - git
+            - java-1.8.0-openjdk-devel    
+        state: present
+        update_cache: yes
+
+        #    - name: Enable and Start openjdk service
+        #      service:
+        #        name: openjdk
+        #        enabled: yes
+        #        state: present
+
+ 
+#      git:
+#        repo: https://github.com/arksinha93/python-flask-demo.git
+#        dest: /home/arksinha/python-flask-demo 
+
+#    - name: Change Directory
+#      command: chdir=/home/arksinha/python-flask-demo ls
+
+    
